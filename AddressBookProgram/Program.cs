@@ -13,6 +13,11 @@ namespace AddressBookProgram
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Welcome To Adress Book Program");
+            //ReadInput();
+            StoreDetails storeDetails = new StoreDetails("sai", "vijaya", "address", "city", "state", 123, 123456789, "something");
+            Console.Read();
         }
+        
     }
 }
