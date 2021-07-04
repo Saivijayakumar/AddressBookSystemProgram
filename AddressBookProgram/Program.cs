@@ -79,21 +79,21 @@ namespace AddressBookProgram
                         else
                         {
                             Console.Write("Enter the First Name : ");
-                            firstName = Console.ReadLine();
+                            store.firstName = Console.ReadLine();
                             Console.Write("Enter the Last Name : ");
-                            lastName = Console.ReadLine();
+                            store.lastName = Console.ReadLine();
                             Console.Write("Enter the Address : ");
-                            address = Console.ReadLine();
+                            store.address = Console.ReadLine();
                             Console.Write("Enter the City Name : ");
-                            city = Console.ReadLine();
+                            store.city = Console.ReadLine();
                             Console.Write("Enter the State Name : ");
-                            state = Console.ReadLine();
+                            store.state = Console.ReadLine();
                             Console.Write("Enter the zip code : ");
-                            zip = Convert.ToInt32(Console.ReadLine());
+                            store.zip = Convert.ToInt32(Console.ReadLine());
                             Console.Write("Enter the Phone Number : ");
-                            phoneNumber = long.Parse(Console.ReadLine());
+                            store.phoneNumber = long.Parse(Console.ReadLine());
                             Console.Write("Enter the email address : ");
-                            email = Console.ReadLine();
+                            store.email = Console.ReadLine();
                             Console.WriteLine("Details are updated");
                         }
                         break;
