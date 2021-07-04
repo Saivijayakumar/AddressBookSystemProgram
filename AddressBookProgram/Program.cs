@@ -25,7 +25,7 @@ namespace AddressBookProgram
             Console.WriteLine("Welcome To Adress Book Program");
             Console.WriteLine("\t===> LIST of Features <====");
             Console.WriteLine("\t----------------------------------------------");
-            Console.WriteLine("\t 1.Adding New Contact\n\t 0.For Exit");
+            Console.WriteLine("\t 1.Adding New Contact\n\t 2.Edit Contact\n\t 0.For Exit");
             Console.WriteLine("\t----------------------------------------------");
         
             Program program = new Program();
@@ -66,6 +66,35 @@ namespace AddressBookProgram
                         else
                         {
                             Console.WriteLine("Existing Contact");
+                        }
+                        break;
+                    case 2:
+                        Console.WriteLine("Enter First Name to Edit: ");
+                        firstName = Console.ReadLine();
+                        StoreDetails store = book.CheckingExistence(firstName);
+                        if(store == null)
+                        {
+                            Console.WriteLine("There is no such contact called {0} ", firstName);
+                        }
+                        else
+                        {
+                            Console.Write("Enter the First Name : ");
+                            firstName = Console.ReadLine();
+                            Console.Write("Enter the Last Name : ");
+                            lastName = Console.ReadLine();
+                            Console.Write("Enter the Address : ");
+                            address = Console.ReadLine();
+                            Console.Write("Enter the City Name : ");
+                            city = Console.ReadLine();
+                            Console.Write("Enter the State Name : ");
+                            state = Console.ReadLine();
+                            Console.Write("Enter the zip code : ");
+                            zip = Convert.ToInt32(Console.ReadLine());
+                            Console.Write("Enter the Phone Number : ");
+                            phoneNumber = long.Parse(Console.ReadLine());
+                            Console.Write("Enter the email address : ");
+                            email = Console.ReadLine();
+                            Console.WriteLine("Details are updated");
                         }
                         break;
                     case 0:
