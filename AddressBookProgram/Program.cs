@@ -25,7 +25,7 @@ namespace AddressBookProgram
             Console.WriteLine("Welcome To Adress Book Program");
             Console.WriteLine("\t===> LIST of Features <====");
             Console.WriteLine("\t----------------------------------------------");
-            Console.WriteLine("\t 1.Adding New Contact\n\t 2.Edit Contact\n\t 0.For Exit");
+            Console.WriteLine("\t 1.Adding New Contact\n\t 2.Edit Contact\n\t 3.Delet Contact\n\t 0.For Exit");
             Console.WriteLine("\t----------------------------------------------");
         
             Program program = new Program();
