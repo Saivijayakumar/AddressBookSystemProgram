@@ -97,6 +97,19 @@ namespace AddressBookProgram
                             Console.WriteLine("Details are updated");
                         }
                         break;
+
+                    case 3:
+                        Console.WriteLine("Enter First Name To Delete: ");
+                        firstName = Console.ReadLine();
+                        if(book.removeing(firstName))
+                        {
+                            Console.WriteLine("Contact Deleted successfull");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Given Contact {firstName} is not present");
+                        }
+                        break;
                     case 0:
                         simply = false;
                         break;

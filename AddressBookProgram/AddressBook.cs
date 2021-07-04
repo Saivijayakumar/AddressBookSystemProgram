@@ -29,6 +29,21 @@ namespace AddressBookProgram
                 return false;
             }
         }
+
+        public bool removeing(string firstName)
+        {
+            StoreDetails store = CheckingExistence(firstName);
+
+            if(store != null)
+            {
+                storeDetails.Remove(store);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public StoreDetails CheckingExistence(string firstName)
         {
             StoreDetails store = storeDetails.Find((a) => a.firstName == firstName);
