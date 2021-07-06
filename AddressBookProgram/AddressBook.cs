@@ -38,7 +38,7 @@ namespace AddressBookProgram
         {
             StoreDetails store = CheckingExistence(firstName);
 
-            if(store != null)
+            if (store != null)
             {
                 storeDetails.Remove(store);
                 //deleting in Dictionary

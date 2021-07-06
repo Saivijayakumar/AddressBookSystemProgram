@@ -6,9 +6,6 @@ using System.Threading.Tasks;
 
 namespace AddressBookProgram
 {
-    /// <summary>
-    /// =================>Welcome To Address Book Program<============
-    /// </summary>
     class Program
     {
         public AddressBook book = new AddressBook();
@@ -27,10 +24,10 @@ namespace AddressBookProgram
             Console.WriteLine("\t----------------------------------------------");
             Console.WriteLine("\t 1.Adding New Contact\n\t 2.Edit Contact\n\t 3.Delet Contact\n\t 0.For Exit");
             Console.WriteLine("\t----------------------------------------------");
-        
+
             Program program = new Program();
             program.FeaturesList();
-            
+
         }
         public void FeaturesList()
         {
@@ -43,23 +40,9 @@ namespace AddressBookProgram
                 {
                     case 1:
                         Console.WriteLine("\n\t Adding New Contact Please Enter Details");
-                        Console.Write("Enter the First Name : ");
-                        firstName = Console.ReadLine();
-                        Console.Write("Enter the Last Name : ");
-                        lastName = Console.ReadLine();
-                        Console.Write("Enter the Address : ");
-                        address = Console.ReadLine();
-                        Console.Write("Enter the City Name : ");
-                        city = Console.ReadLine();
-                        Console.Write("Enter the State Name : ");
-                        state = Console.ReadLine();
-                        Console.Write("Enter the zip code : ");
-                        zip = Convert.ToInt32(Console.ReadLine());
-                        Console.Write("Enter the Phone Number : ");
-                        phoneNumber = long.Parse(Console.ReadLine());
-                        Console.Write("Enter the email address : ");
-                        email = Console.ReadLine();
-                        if (book.AddNewContact(firstName, lastName, address, city, state, zip, phoneNumber, email))
+                        StoreDetails store1 = new StoreDetails(firstName, lastName, address, city, state, zip, phoneNumber, email);
+                        store1 = TakeDetails(store1);
+                        if (book.AddNewContact(store1.firstName, store1.lastName, store1.address, store1.city, store1.state, store1.zip, store1.phoneNumber, store1.email))
                         {
                             Console.WriteLine("Contact Is Added Successfully");
                         }
@@ -72,28 +55,14 @@ namespace AddressBookProgram
                         Console.WriteLine("Enter First Name to Edit: ");
                         firstName = Console.ReadLine();
                         StoreDetails store = book.CheckingExistence(firstName);
-                        if(store == null)
+                        if (store == null)
                         {
                             Console.WriteLine("There is no such contact called {0} ", firstName);
                         }
                         else
                         {
-                            Console.Write("Enter the First Name : ");
-                            store.firstName = Console.ReadLine();
-                            Console.Write("Enter the Last Name : ");
-                            store.lastName = Console.ReadLine();
-                            Console.Write("Enter the Address : ");
-                            store.address = Console.ReadLine();
-                            Console.Write("Enter the City Name : ");
-                            store.city = Console.ReadLine();
-                            Console.Write("Enter the State Name : ");
-                            store.state = Console.ReadLine();
-                            Console.Write("Enter the zip code : ");
-                            store.zip = Convert.ToInt32(Console.ReadLine());
-                            Console.Write("Enter the Phone Number : ");
-                            store.phoneNumber = long.Parse(Console.ReadLine());
-                            Console.Write("Enter the email address : ");
-                            store.email = Console.ReadLine();
+                            StoreDetails store2 = new StoreDetails(firstName, lastName, address, city, state, zip, phoneNumber, email);
+                            store2 = TakeDetails(store2);
                             Console.WriteLine("Details are updated");
                         }
                         break;
@@ -101,7 +70,7 @@ namespace AddressBookProgram
                     case 3:
                         Console.WriteLine("Enter First Name To Delete: ");
                         firstName = Console.ReadLine();
-                        if(book.removeing(firstName))
+                        if (book.removeing(firstName))
                         {
                             Console.WriteLine("Contact Deleted successfull");
                         }
@@ -120,6 +89,26 @@ namespace AddressBookProgram
                 }
             }
         }
-        
+        public static StoreDetails TakeDetails(StoreDetails store)
+        {
+            Console.Write("Enter the First Name : ");
+            store.firstName = Console.ReadLine();
+            Console.Write("Enter the Last Name : ");
+            store.lastName = Console.ReadLine();
+            Console.Write("Enter the Address : ");
+            store.address = Console.ReadLine();
+            Console.Write("Enter the City Name : ");
+            store.city = Console.ReadLine();
+            Console.Write("Enter the State Name : ");
+            store.state = Console.ReadLine();
+            Console.Write("Enter the zip code : ");
+            store.zip = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter the Phone Number : ");
+            store.phoneNumber = long.Parse(Console.ReadLine());
+            Console.Write("Enter the email address : ");
+            store.email = Console.ReadLine();
+            return store;
+        }
+
     }
 }
