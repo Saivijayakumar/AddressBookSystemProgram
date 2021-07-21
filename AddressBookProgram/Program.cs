@@ -35,8 +35,7 @@ namespace AddressBookProgram
             while (simply)
             {
                 Console.Write("\n\tEnter your choice : ");
-                int choice = Convert.ToInt32(Console.ReadLine());
-                switch (choice)
+                switch (Convert.ToInt32(Console.ReadLine()))
                 {
                     case 1:
                         Console.WriteLine("\n\t Adding New Contact Please Enter Details");
