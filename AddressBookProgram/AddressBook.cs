@@ -8,13 +8,16 @@ namespace AddressBookProgram
 {
     class AddressBook
     {
+        //It help to store the contacts 
         public List<StoreDetails> storeDetails;
+        //default constructure
         public AddressBook()
         {
             storeDetails = new List<StoreDetails>();
         }
         public bool AddNewContact(StoreDetails store)
         {
+            //checking the name is present in list are not
             StoreDetails result = CheckingExistence(store.firstName);
             if (result == null)
             {
@@ -28,6 +31,7 @@ namespace AddressBookProgram
         }
         public bool removeing(string firstName)
         {
+            //checking the name is present in list are not
             StoreDetails store = CheckingExistence(firstName);
 
             if (store != null)
@@ -42,6 +46,7 @@ namespace AddressBookProgram
         }
         public StoreDetails CheckingExistence(string firstName)
         {
+            //checking the name is present in list are not
             StoreDetails store = storeDetails.Find((a) => a.firstName == firstName);
             return store;
         }
