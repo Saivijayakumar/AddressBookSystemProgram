@@ -9,23 +9,16 @@ namespace AddressBookProgram
     class AddressBook
     {
         public List<StoreDetails> storeDetails;
-        public Dictionary<string, StoreDetails> keyValuesMap;
-
         public AddressBook()
         {
             storeDetails = new List<StoreDetails>();
-            keyValuesMap = new Dictionary<string, StoreDetails>();
         }
-
-        public bool AddNewContact(string firstName, string lastName, string address, string city, string state, int zip, long phoneNumber, string email)
+        public bool AddNewContact(StoreDetails store)
         {
-            StoreDetails store = new StoreDetails(firstName, lastName, address, city, state, zip, phoneNumber, email);
-            StoreDetails result = CheckingExistence(firstName);
+            StoreDetails result = CheckingExistence(store.firstName);
             if (result == null)
             {
                 storeDetails.Add(store);
-                //storeing into dictionary
-                keyValuesMap.Add(firstName, store);
                 return true;
             }
             else
@@ -33,7 +26,6 @@ namespace AddressBookProgram
                 return false;
             }
         }
-
         public bool removeing(string firstName)
         {
             StoreDetails store = CheckingExistence(firstName);
@@ -41,8 +33,6 @@ namespace AddressBookProgram
             if (store != null)
             {
                 storeDetails.Remove(store);
-                //deleting in Dictionary
-                keyValuesMap.Remove(firstName);
                 return true;
             }
             else

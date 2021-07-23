@@ -8,51 +8,77 @@ namespace AddressBookProgram
 {
     class Program
     {
-        public AddressBook book = new AddressBook();
-        public string firstName;
-        public string lastName;
-        public string address;
-        public string city;
-        public string state;
-        public int zip;
-        public long phoneNumber;
-        public string email;
+        public static Dictionary<string, AddressBook> addressBookDict = new Dictionary<string, AddressBook>();
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome To Adress Book Program");
+            Console.WriteLine("\t----------------------------------------------");
+            Console.WriteLine("\t 1.Adding New Address Book\n\t 2.Working on the Existing Address Book\n\t 0.For Exit");
+            Console.WriteLine("\t----------------------------------------------");
+            bool simply = true;
+            Program program = new Program();
+            while (simply)
+            {
+                Console.Write("\n\tEnter your choice For Address Book : ");
+                switch (Convert.ToInt32(Console.ReadLine()))
+                {
+                    case 1:
+                        Console.Write("Enter the Name of Address Book : ");
+                        string name = Console.ReadLine();
+                        addressBookDict.Add(name, new AddressBook());
+                        break;
+                    case 2:
+                        Console.Write("Enter the Name of Address Book you wish to Work On : ");
+                        name = Console.ReadLine();
+                        if (addressBookDict.ContainsKey(name))
+                        {
+                            AddressBook addressBook = addressBookDict[name];
+                            program.FeaturesList(addressBook, name);
+                        }
+                        else
+                        {
+                            Console.WriteLine($"There is No {name} Address Book \nEnter vallid Address Book Name");
+                        }
+                        break;
+                    case 0:
+                        simply = false;
+                        break;
+
+                    default:
+                        Console.WriteLine("\t PLEASE ENTER A VALID OPTION");
+                        break;
+                }
+            }
+        }
+        public void FeaturesList(AddressBook book, string addressBookName)
+        {
+            Console.WriteLine($"\tNow You Are In {addressBookName} Address Book");
             Console.WriteLine("\t===> LIST of Features <====");
             Console.WriteLine("\t----------------------------------------------");
             Console.WriteLine("\t 1.Adding New Contact\n\t 2.Edit Contact\n\t 3.Delet Contact\n\t 0.For Exit");
             Console.WriteLine("\t----------------------------------------------");
-
-            Program program = new Program();
-            program.FeaturesList();
-
-        }
-        public void FeaturesList()
-        {
             bool simply = true;
             while (simply)
             {
-                Console.Write("\n\tEnter your choice : ");
+                Console.Write("\n\tEnter your choice For Features List : ");
                 switch (Convert.ToInt32(Console.ReadLine()))
                 {
                     case 1:
                         Console.WriteLine("\n\t Adding New Contact Please Enter Details");
-                        StoreDetails store1 = new StoreDetails(firstName, lastName, address, city, state, zip, phoneNumber, email);
+                        StoreDetails store1 = new StoreDetails();
                         store1 = TakeDetails(store1);
-                        if (book.AddNewContact(store1.firstName, store1.lastName, store1.address, store1.city, store1.state, store1.zip, store1.phoneNumber, store1.email))
+                        if (book.AddNewContact(store1))
                         {
                             Console.WriteLine("Contact Is Added Successfully");
                         }
                         else
                         {
-                            Console.WriteLine("Existing Contact");
+                            Console.WriteLine("\n\t\t---->The Contact Already Exists<------");
                         }
                         break;
                     case 2:
                         Console.WriteLine("Enter First Name to Edit: ");
-                        firstName = Console.ReadLine();
+                        string firstName = Console.ReadLine();
                         StoreDetails store = book.CheckingExistence(firstName);
                         if (store == null)
                         {
@@ -60,18 +86,17 @@ namespace AddressBookProgram
                         }
                         else
                         {
-                            StoreDetails store2 = new StoreDetails(firstName, lastName, address, city, state, zip, phoneNumber, email);
+                            StoreDetails store2 = new StoreDetails();
                             store2 = TakeDetails(store2);
                             Console.WriteLine("Details are updated");
                         }
                         break;
-
                     case 3:
                         Console.WriteLine("Enter First Name To Delete: ");
                         firstName = Console.ReadLine();
                         if (book.removeing(firstName))
                         {
-                            Console.WriteLine("Contact Deleted successfull");
+                            Console.WriteLine("\n\t------>Contact Deleted successfull<-------");
                         }
                         else
                         {
