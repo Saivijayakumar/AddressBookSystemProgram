@@ -13,7 +13,7 @@ namespace AddressBookProgram
         {
             Console.WriteLine("Welcome To Adress Book Program");
             Console.WriteLine("\t----------------------------------------------");
-            Console.WriteLine("\t 1.Adding New Address Book\n\t 2.Working on the Existing Address Book\n\t 0.For Exit");
+            Console.WriteLine("\t 1.Adding New Address Book\n\t 2.Working on the Existing Address Book\n\t 3.Display the persons from all Address Books who are in same state\n\t 0.For Exit");
             Console.WriteLine("\t----------------------------------------------");
             bool simply = true;
             Program program = new Program();
@@ -39,6 +39,11 @@ namespace AddressBookProgram
                         {
                             Console.WriteLine($"There is No {name} Address Book \nEnter vallid Address Book Name");
                         }
+                        break;
+                    case 3:
+                        Console.Write("Enter State Name: ");
+                        string stateName = Console.ReadLine();
+                        DisplayPersonsStatewise(stateName);
                         break;
                     case 0:
                         simply = false;
@@ -111,6 +116,25 @@ namespace AddressBookProgram
                         Console.WriteLine("\t PLEASE ENTER A VALID OPTION");
                         break;
                 }
+            }
+        }
+        public static void DisplayPersonsStatewise(string stateName)
+        {
+            if(addressBookDict.Count != 0)
+            {
+                Console.WriteLine($"These Are The List Of Persons From {stateName} State");
+                foreach (var dict in addressBookDict)
+                {
+                    var retunList = dict.Value.storeDetails.FindAll(a => a.state.Equals(stateName));
+                    foreach (var i in retunList)
+                    {
+                        Console.WriteLine(i.firstName);
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("We don't have any contacts First Add contacts");
             }
         }
         public static StoreDetails TakeDetails(StoreDetails store)
