@@ -9,6 +9,7 @@ namespace AddressBookProgram
     class Program
     {
         public static Dictionary<string, AddressBook> addressBookDict = new Dictionary<string, AddressBook>();
+        public static Dictionary<string, List<StoreDetails>> StateWiseContacts = new Dictionary<string, List<StoreDetails>>();
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome To Adress Book Program");
@@ -43,7 +44,10 @@ namespace AddressBookProgram
                     case 3:
                         Console.Write("Enter State Name: ");
                         string stateName = Console.ReadLine();
+                        //This useing by now method....
                         DisplayPersonsStatewise(stateName);
+                        //By using Dictonary we are displaying contacts...
+                        DisplayStateWiseContacts(stateName);
                         break;
                     case 0:
                         simply = false;
@@ -72,6 +76,7 @@ namespace AddressBookProgram
                         Console.WriteLine("\n\t Adding New Contact Please Enter Details");
                         StoreDetails store1 = new StoreDetails();
                         store1 = TakeDetails(store1);
+                        AddingStateWiseContacts(store1);
                         if (book.AddNewContact(store1))
                         {
                             Console.WriteLine("Contact Is Added Successfully");
@@ -135,6 +140,30 @@ namespace AddressBookProgram
             else
             {
                 Console.WriteLine("We don't have any contacts First Add contacts");
+            }
+        }
+        public static void AddingStateWiseContacts(StoreDetails details)
+        {
+            if (StateWiseContacts.ContainsKey(details.state))
+            {
+                List<StoreDetails> stateContacts = StateWiseContacts[details.state];
+                stateContacts.Add(details);
+            }
+            else
+            {
+                List<StoreDetails> stateContacts = new List<StoreDetails>();
+                stateContacts.Add(details);
+                StateWiseContacts.Add(details.state, stateContacts);
+            }
+        }
+        public static void DisplayStateWiseContacts(string stateName)
+        {
+            List<StoreDetails> stateContact = StateWiseContacts[stateName];
+            Console.WriteLine($"These Are The List Of Contacts From {stateName} State");
+            foreach (StoreDetails details in stateContact)
+            {
+                Console.Write($"Name : {details.firstName} {details.lastName}");
+                Console.WriteLine($"\tPhone Number : {details.phoneNumber}");
             }
         }
         public static StoreDetails TakeDetails(StoreDetails store)
