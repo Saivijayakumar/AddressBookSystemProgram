@@ -10,11 +10,13 @@ namespace AddressBookProgram
     {
         //crating Dictionary for handleing multiple address books
         public static Dictionary<string, AddressBook> addressBookDict = new Dictionary<string, AddressBook>();
+        //crating Dictionary for handleing contacts state wise
+        public static Dictionary<string, List<StoreDetails>> StateWiseContacts = new Dictionary<string, List<StoreDetails>>();
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome To Adress Book Program");
             Console.WriteLine("\t----------------------------------------------");
-            Console.WriteLine("\t 1.Adding New Address Book\n\t 2.Working on the Existing Address Book\n\t 3.Display the persons from all Address Books who are in same state and count of the persons\n\t 0.For Exit");
+            Console.WriteLine("\t 1.Adding New Address Book\n\t 2.Working on the Existing Address Book\n\t 3.Display the persons from all Address Books who are in same state\n\t 4.Count Of Contacts State Wise\n\t 0.For Exit");
             Console.WriteLine("\t----------------------------------------------");
             bool simply = true;
             Program program = new Program();
@@ -26,7 +28,6 @@ namespace AddressBookProgram
                     case 1:
                         Console.Write("Enter the Name of Address Book : ");
                         string name = Console.ReadLine();
-                        //adding new address book
                         addressBookDict.Add(name, new AddressBook());
                         break;
                     case 2:
@@ -48,8 +49,16 @@ namespace AddressBookProgram
                     case 3:
                         Console.Write("Enter State Name: ");
                         string stateName = Console.ReadLine();
-                        //Displaying all the persons from all address book who is from same state and count of the persons
-                        DisplayPersonsStatewise(stateName);
+                        //This useing by now method....
+                        //DisplayPersonsStatewise(stateName);
+                        //By using Dictonary we are displaying contacts...
+                        DisplayStateWiseContacts(stateName);
+                        break;
+                    case 4:
+                        Console.Write("Enter State Name: ");
+                        string stateNameForCount = Console.ReadLine();
+                        //Displaying all the count of contacts from all address book who is from same state..
+                        DisplayPersonsStatewise(stateNameForCount);
                         break;
                     case 0:
                         simply = false;
@@ -63,7 +72,7 @@ namespace AddressBookProgram
         }
         public void FeaturesList(AddressBook book, string addressBookName)
         {
-            Console.WriteLine($"\tNow You Are In {addressBookName} Address Book");
+            Console.WriteLine($"\n\tNow You Are In {addressBookName} Address Book");
             Console.WriteLine("\t===> LIST of Features <====");
             Console.WriteLine("\t----------------------------------------------");
             Console.WriteLine("\t 1.Adding New Contact\n\t 2.Edit Contact\n\t 3.Delet Contact\n\t 4.Display the count of contacts \n\t 0.For Exit");
@@ -78,6 +87,8 @@ namespace AddressBookProgram
                         Console.WriteLine("\n\t Adding New Contact Please Enter Details");
                         StoreDetails store1 = new StoreDetails();
                         store1 = TakeDetails(store1);
+                        //Adding state wise contacts
+                        AddingStateWiseContacts(store1);
                         //adding new contact
                         if (book.AddNewContact(store1))
                         {
@@ -89,7 +100,7 @@ namespace AddressBookProgram
                         }
                         break;
                     case 2:
-                        Console.WriteLine("Enter First Name to Edit: ");
+                        Console.WriteLine("\nEnter First Name to Edit: ");
                         string firstName = Console.ReadLine();
                         //checking the name is present in address book or not
                         StoreDetails store = book.CheckingExistence(firstName);
@@ -106,7 +117,7 @@ namespace AddressBookProgram
                         }
                         break;
                     case 3:
-                        Console.WriteLine("Enter First Name To Delete: ");
+                        Console.WriteLine("\nEnter First Name To Delete: ");
                         firstName = Console.ReadLine();
                         if (book.removeing(firstName))
                         {
@@ -133,10 +144,10 @@ namespace AddressBookProgram
         }
         public static void DisplayPersonsStatewise(string stateName)
         {
-            int count = 0;
             if(addressBookDict.Count != 0)
             {
-                //Console.WriteLine($"These Are The List Of Persons From {stateName} State");
+                int count = 0;
+                //Console.WriteLine($"\nThese Are The List Of Persons From {stateName} State");
                 foreach (var dict in addressBookDict)
                 {
                     var retunList = dict.Value.storeDetails.FindAll(a => a.state.Equals(stateName));
@@ -151,12 +162,37 @@ namespace AddressBookProgram
             }
             else
             {
-                Console.WriteLine("We don't have any contacts First Add contacts");
+                Console.WriteLine("We don't have any contacts. First Add contacts");
             }
+        }
+        public static void AddingStateWiseContacts(StoreDetails details)
+        {
+            if (StateWiseContacts.ContainsKey(details.state))
+            {
+                List<StoreDetails> stateContacts = StateWiseContacts[details.state];
+                stateContacts.Add(details);
+            }
+            else
+            {
+                List<StoreDetails> stateContacts = new List<StoreDetails>();
+                stateContacts.Add(details);
+                StateWiseContacts.Add(details.state, stateContacts);
+            }
+        }
+        public static void DisplayStateWiseContacts(string stateName)
+        {
+            Console.WriteLine("-----------------------------------------------");
+            List<StoreDetails> stateContact = StateWiseContacts[stateName];
+            Console.WriteLine($"These Are The List Of Contacts From {stateName} State");
+            foreach (StoreDetails details in stateContact)
+            {
+                Console.Write($"\nName : {details.firstName} {details.lastName} ==>");
+                Console.WriteLine($"\tPhone Number : {details.phoneNumber}");
+            }
+            Console.WriteLine("-----------------------------------------------");
         }
         public static StoreDetails TakeDetails(StoreDetails store)
         {
-            //This method help to Take all details
             Console.Write("Enter the First Name : ");
             store.firstName = Console.ReadLine();
             Console.Write("Enter the Last Name : ");
