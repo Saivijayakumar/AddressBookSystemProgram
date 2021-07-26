@@ -69,6 +69,9 @@ namespace AddressBookProgram
                         break;
                 }
             }
+            Console.WriteLine("foe check");
+            new AddressBook().displaylis();
+            Console.ReadLine();
         }
         public void FeaturesList(AddressBook book, string addressBookName)
         {
@@ -211,6 +214,6 @@ namespace AddressBookProgram
             store.email = Console.ReadLine();
             return store;
         }
-
+        
     }
 }

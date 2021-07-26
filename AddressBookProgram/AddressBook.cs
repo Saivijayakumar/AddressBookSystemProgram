@@ -22,6 +22,8 @@ namespace AddressBookProgram
             if (result == null)
             {
                 storeDetails.Add(store);
+                storeDetails = storeDetails.OrderBy(p => p.firstName).ToList();
+                displaylis();
                 return true;
             }
             else
@@ -49,6 +51,13 @@ namespace AddressBookProgram
             //checking the name is present in list are not
             StoreDetails store = storeDetails.Find((a) => a.firstName == firstName);
             return store;
+        }
+        public  void displaylis()
+        {
+            foreach(var i in storeDetails)
+            {
+                Console.WriteLine(i.firstName);
+            }
         }
     }
 }
