@@ -15,6 +15,12 @@ namespace AddressBookProgram
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome To Adress Book Program");
+            //Help the user to see what is there in file
+            Console.Write("Do you want to see the existing information in  Notepad (Y/N) :");
+            if((Console.ReadLine().ToLower()) == "y")
+            {
+                FileIOOperations.ReadTheFile();
+            }
             Console.WriteLine("\t----------------------------------------------");
             Console.WriteLine("\t 1.Adding New Address Book\n\t 2.Working on the Existing Address Book\n\t 3.Display the persons from all Address Books who are in same state\n\t 4.Count Of Contacts State Wise\n\t 0.For Exit");
             Console.WriteLine("\t----------------------------------------------");
@@ -69,6 +75,11 @@ namespace AddressBookProgram
                         break;
                 }
             }
+            //After the execution done it automaticaly store the details into file.
+            FileIOOperations.WriteingIntoFile(addressBookDict);
+            //It will show the content of file.
+            FileIOOperations.ReadTheFile();
+            Console.ReadLine();
         }
         public void FeaturesList(AddressBook book, string addressBookName)
         {

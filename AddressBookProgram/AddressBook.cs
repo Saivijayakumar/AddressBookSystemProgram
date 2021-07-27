@@ -22,8 +22,8 @@ namespace AddressBookProgram
             if (result == null)
             {
                 storeDetails.Add(store);
-                //it helps to sort the list by state name
-                storeDetails = storeDetails.OrderBy(p => p.state).ToList();
+                //it helps to sort the list by first name
+                storeDetails = storeDetails.OrderBy(p => p.firstName).ToList();
                 return true;
             }
             else
@@ -43,6 +43,7 @@ namespace AddressBookProgram
             }
             else
             {
+                
                 return false;
             }
         }
@@ -52,5 +53,11 @@ namespace AddressBookProgram
             StoreDetails store = storeDetails.Find((a) => a.firstName == firstName);
             return store;
         }
+       /* public override string ToString()
+        {
+            //StoreDetails store = new StoreDetails();
+            //return $"Name: {store.firstName} {store.lastName} Address: {store.address} City: {store.city} State: {store.state} Zip: {store.zip} PhoneNumber: {store.phoneNumber} Email: {store.email} ";
+            return "";
+        }*/
     }
 }

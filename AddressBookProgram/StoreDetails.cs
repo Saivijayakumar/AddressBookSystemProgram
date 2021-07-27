@@ -16,5 +16,10 @@ namespace AddressBookProgram
         public int zip { get; set; }
         public long phoneNumber { get; set; }
         public string email { get; set; }
+
+        public override string ToString()
+        {
+            return $"Name: {firstName} {lastName} Address: {address} City: {city} State: {state} Zip: {zip} PhoneNumber: {phoneNumber} Email: {email} ";
+        }
     }
 }
