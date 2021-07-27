@@ -15,14 +15,8 @@ namespace AddressBookProgram
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome To Adress Book Program");
-            //Help the user to see what is there in file
-            Console.Write("Do you want to see the existing information in  Notepad (Y/N) :");
-            if((Console.ReadLine().ToLower()) == "y")
-            {
-                FileIOOperations.ReadTheFile();
-            }
             Console.WriteLine("\t----------------------------------------------");
-            Console.WriteLine("\t 1.Adding New Address Book\n\t 2.Working on the Existing Address Book\n\t 3.Display the persons from all Address Books who are in same state\n\t 4.Count Of Contacts State Wise\n\t 0.For Exit");
+            Console.WriteLine("\t 1.Adding New Address Book\n\t 2.Working on the Existing Address Book\n\t 3.Display the persons from all Address Books who are in same state\n\t 4.Count Of Contacts State Wise\n\t 5.Display the information in NotePad\n\t 0.For Exit");
             Console.WriteLine("\t----------------------------------------------");
             bool simply = true;
             Program program = new Program();
@@ -65,6 +59,10 @@ namespace AddressBookProgram
                         string stateNameForCount = Console.ReadLine();
                         //Displaying all the count of contacts from all address book who is from same state..
                         DisplayPersonsStatewise(stateNameForCount);
+                        break;
+                    case 5:
+                        //It help to display the existing content in NotePad
+                        FileIOOperations.ReadTheFile();
                         break;
                     case 0:
                         simply = false;
