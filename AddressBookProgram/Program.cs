@@ -16,7 +16,7 @@ namespace AddressBookProgram
         {
             Console.WriteLine("Welcome To Adress Book Program");
             Console.WriteLine("\t----------------------------------------------");
-            Console.WriteLine("\t 1.Adding New Address Book\n\t 2.Working on the Existing Address Book\n\t 3.Display the persons from all Address Books who are in same state\n\t 4.Count Of Contacts State Wise\n\t 5.Display the information in NotePad\n\t 0.For Exit");
+            Console.WriteLine("\t 1.Adding New Address Book\n\t 2.Working on the Existing Address Book\n\t 3.Display the persons from all Address Books who are in same state\n\t 4.Count Of Contacts State Wise\n\t 5.Display the information in NotePad\n\t 6.Display the information in JsonFile\n\t 7.Store in JSon File\n\t 0.For Exit");
             Console.WriteLine("\t----------------------------------------------");
             bool simply = true;
             Program program = new Program();
@@ -28,7 +28,15 @@ namespace AddressBookProgram
                     case 1:
                         Console.Write("Enter the Name of Address Book : ");
                         string name = Console.ReadLine();
-                        addressBookDict.Add(name, new AddressBook());
+                        if(!addressBookDict.ContainsKey(name))
+                        {
+                            addressBookDict.Add(name, new AddressBook());
+                        }
+                        else
+                        {
+                            Console.WriteLine($"{name} Address Book is all ready present");
+                        }
+                        
                         break;
                     case 2:
                         Console.Write("Enter the Name of Address Book you wish to Work On : ");
@@ -64,6 +72,14 @@ namespace AddressBookProgram
                         //It help to display the existing content in NotePad
                         FileIOOperations.ReadTheFile();
                         break;
+                    case 6:
+                        ////converting streams of byte to object
+                        JsonOperations.DeserializeingJsonFile();
+                        break;
+                    case 7:
+                        //convert object to streams of Bytes
+                        JsonOperations.SerializeingJsonFile(addressBookDict);
+                        break;
                     case 0:
                         simply = false;
                         break;
@@ -73,11 +89,6 @@ namespace AddressBookProgram
                         break;
                 }
             }
-            //After the execution done it automaticaly store the details into file.
-            FileIOOperations.WriteingIntoFile(addressBookDict);
-            //It will show the content of file.
-            FileIOOperations.ReadTheFile();
-            Console.ReadLine();
         }
         public void FeaturesList(AddressBook book, string addressBookName)
         {
@@ -139,7 +150,7 @@ namespace AddressBookProgram
                         break;
                     case 4:
                         Console.WriteLine("\n Total Number of Address Book are : " + addressBookDict.Count);
-                        Console.WriteLine(" Number of Contacts in this Dictionary : " + book.storeDetails.Count);
+                        Console.WriteLine(" Number of Contacts in this Dictionary : " + book.contactDetails.Count);
                         break;
                     case 0:
                         simply = false;
@@ -159,7 +170,7 @@ namespace AddressBookProgram
                 //Console.WriteLine($"\nThese Are The List Of Persons From {stateName} State");
                 foreach (var dict in addressBookDict)
                 {
-                    var retunList = dict.Value.storeDetails.FindAll(a => a.state.Equals(stateName));
+                    var retunList = dict.Value.contactDetails.FindAll(a => a.state.Equals(stateName));
                     foreach (var i in retunList)
                     {
                         //if you want to see the names of the persons then you can use below line

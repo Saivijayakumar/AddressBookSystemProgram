@@ -9,11 +9,11 @@ namespace AddressBookProgram
     class AddressBook
     {
         //It help to store the contacts 
-        public List<StoreDetails> storeDetails;
+        public List<StoreDetails> contactDetails;
         //default constructure
         public AddressBook()
         {
-            storeDetails = new List<StoreDetails>();
+            contactDetails = new List<StoreDetails>();
         }
         public bool AddNewContact(StoreDetails store)
         {
@@ -21,9 +21,9 @@ namespace AddressBookProgram
             StoreDetails result = CheckingExistence(store.firstName);
             if (result == null)
             {
-                storeDetails.Add(store);
+                contactDetails.Add(store);
                 //it helps to sort the list by first name
-                storeDetails = storeDetails.OrderBy(p => p.firstName).ToList();
+                contactDetails = contactDetails.OrderBy(p => p.firstName).ToList();
                 return true;
             }
             else
@@ -38,7 +38,7 @@ namespace AddressBookProgram
 
             if (store != null)
             {
-                storeDetails.Remove(store);
+                contactDetails.Remove(store);
                 return true;
             }
             else
@@ -50,14 +50,8 @@ namespace AddressBookProgram
         public StoreDetails CheckingExistence(string firstName)
         {
             //checking the name is present in list are not
-            StoreDetails store = storeDetails.Find((a) => a.firstName == firstName);
+            StoreDetails store = contactDetails.Find((a) => a.firstName == firstName);
             return store;
         }
-       /* public override string ToString()
-        {
-            //StoreDetails store = new StoreDetails();
-            //return $"Name: {store.firstName} {store.lastName} Address: {store.address} City: {store.city} State: {store.state} Zip: {store.zip} PhoneNumber: {store.phoneNumber} Email: {store.email} ";
-            return "";
-        }*/
     }
 }

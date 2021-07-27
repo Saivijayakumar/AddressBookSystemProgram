@@ -19,7 +19,7 @@ namespace AddressBookProgram
             {
                 //store the address book name
                 File.AppendAllText(FILEPATH, $"Address Book :{key.Key} \n");
-                foreach(var value in key.Value.storeDetails)
+                foreach(var value in key.Value.contactDetails)
                 {
                     //store the contacts one by one
                     File.AppendAllText(FILEPATH, value.ToString() + Environment.NewLine);

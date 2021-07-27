@@ -1,0 +1,53 @@
+{
+  "sai": {
+    "contactDetails": [
+      {
+        "firstName": "arun",
+        "lastName": "k",
+        "address": "SBI",
+        "city": "kovur",
+        "state": "TN",
+        "zip": 788392,
+        "phoneNumber": 849993829,
+        "email": "arun@gmail.com"
+      },
+      {
+        "firstName": "ram",
+        "lastName": "Reddy",
+        "address": "Hotel",
+        "city": "nellore",
+        "state": "AP",
+        "zip": 455332,
+        "phoneNumber": 382999282,
+        "email": "ram@gmail.com"
+      },
+      {
+        "firstName": "sai",
+        "lastName": "kumar",
+        "address": "address",
+        "city": "vijayawada",
+        "state": "AP",
+        "zip": 588392,
+        "phoneNumber": 889389229,
+        "email": "sai@gmail.com"
+      }
+    ]
+  },
+  "vijay": {
+    "contactDetails": []
+  },
+  "kumar": {
+    
+    "contactDetails": [
+      {
+        "firstName": "ramya",
+        "lastName": "k",
+        "address": "Nothing",
+        "city": "chennai",
+        "state": "TN",
+        "zip": 60001,
+        "phoneNumber": 748489923,
+        "email": "ramya@gmail.com"
+      }
+    ]
+  }}
