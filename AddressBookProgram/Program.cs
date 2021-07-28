@@ -14,9 +14,9 @@ namespace AddressBookProgram
         public static Dictionary<string, List<StoreDetails>> StateWiseContacts = new Dictionary<string, List<StoreDetails>>();
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome To Adress Book Program");
+            Console.WriteLine("\t\tWelcome To Adress Book Program");
             Console.WriteLine("\t----------------------------------------------");
-            Console.WriteLine("\t 1.Adding New Address Book\n\t 2.Working on the Existing Address Book\n\t 3.Display the persons from all Address Books who are in same state\n\t 4.Count Of Contacts State Wise\n\t 5.Display the information in NotePad\n\t 6.Display the information in JsonFile\n\t 7.Store in JSon File\n\t 0.For Exit");
+            Console.WriteLine("\t 1.Adding New Address Book\n\t 2.Working on the Existing Address Book\n\t 3.Display the persons from all Address Books who are in same state\n\t 4.Count Of Contacts State Wise\n\t 5.Display the information in NotePad\n\t 6.Display the information in JsonFile\n\t 7.Store in JSon File\n\t 8.Store in CSV File\n\t 9.Display the information in CSVFile\n\t 0.For Exit");
             Console.WriteLine("\t----------------------------------------------");
             bool simply = true;
             Program program = new Program();
@@ -80,6 +80,14 @@ namespace AddressBookProgram
                         //convert object to streams of Bytes
                         JsonOperations.SerializeingJsonFile(addressBookDict);
                         break;
+                    case 8:
+                        //stores the input values to csv file
+                        CSVOperations.CsvSerialize(addressBookDict);
+                        break;
+                    case 9:
+                        //display the information in csv file
+                        CSVOperations.CsvDeserialize();
+                        break;
                     case 0:
                         simply = false;
                         break;
@@ -89,6 +97,7 @@ namespace AddressBookProgram
                         break;
                 }
             }
+            Console.ReadLine();
         }
         public void FeaturesList(AddressBook book, string addressBookName)
         {
