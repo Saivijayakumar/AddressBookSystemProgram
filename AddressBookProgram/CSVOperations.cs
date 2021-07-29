@@ -1,4 +1,5 @@
 ﻿using CsvHelper;
+using CsvHelper.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -16,7 +17,8 @@ namespace AddressBookProgram
             try
             {
                 string path =@"C:\Users\SaiVijay\source\repos\AddressBookProgram\AddressBookProgram\CSVFile.csv";
-                using(StreamWriter writer = new StreamWriter(path))
+                List<AddressBook> books = new List<AddressBook>();
+                using (StreamWriter writer = new StreamWriter(path))
                 {
                     using(var csvWriter = new CsvWriter(writer,CultureInfo.InvariantCulture))
                     {
@@ -24,10 +26,12 @@ namespace AddressBookProgram
                         {
                             csvWriter.WriteField("Address Book Name : " + i.Key);
                             csvWriter.NextRecord();
-                            foreach (AddressBook res in temp.Values)
+                            books.Add(i.Value);
+                            foreach(var j in books)
                             {
-                                csvWriter.WriteRecords(res.contactDetails);
+                                csvWriter.WriteRecords(j.contactDetails);
                             }
+                            books.Clear();
                         }
                     }
                 }
